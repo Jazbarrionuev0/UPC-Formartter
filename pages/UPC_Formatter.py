@@ -22,7 +22,7 @@ def format_upcs(text):
     upc_list = [item.strip() for item in raw_items if item.strip()]
     return [f"'%{normalize_upc(upc)}%'" for upc in upc_list]
 
-st.title("🔢  UPC Formatter")
+st.title("🔢 UPC Formatter")
 st.write("Paste UPCs (one per line or separated by commas). The app will normalize them and return them in SQL format.")
 
 input_text = st.text_area("Paste UPCs:")
@@ -37,4 +37,4 @@ if st.button("Process"):
         st.subheader("Result:")
         st.code(output)
 
-        st.success("Done! Copy the result from the box.")
+        st.success("Done! Copy the result.")
