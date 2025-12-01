@@ -17,21 +17,36 @@ def normalize_upc(upc: str) -> str:
 
     return digits
 
+def format_skus(text):
+    raw_items = text.replace("\n", ",").split(",")
+    sku_list = [item.strip() for item in raw_items if item.strip()]
+    return [f"'{sku}'" for sku in sku_list]
+
 def format_upcs(text):
     raw_items = text.replace("\n", ",").split(",")
     upc_list = [item.strip() for item in raw_items if item.strip()]
     return [f"'%{normalize_upc(upc)}%'" for upc in upc_list]
 
-st.title("🔢 UPC Formatter")
-st.write("Paste UPCs (one per line or separated by commas). The app will normalize them and return them in SQL format.")
+st.title("🔢 UPC/SKU Formatter")
 
-input_text = st.text_area("Paste UPCs:")
+is_sku = st.checkbox("Format as SKU (no normalization, no wildcards)", value=False)
+
+if is_sku:
+    st.write("Paste SKUs (one per line or separated by commas). The app will format them for SQL without modification.")
+else:
+    st.write("Paste UPCs (one per line or separated by commas). The app will normalize them and return them in SQL format.")
+
+input_text = st.text_area("Paste UPCs/SKUs:")
 
 if st.button("Process"):
     if not input_text.strip():
-        st.error("You must paste at least one UPC.")
+        st.error("You must paste at least one UPC/SKU.")
     else:
-        formatted = format_upcs(input_text)
+        if is_sku:
+            formatted = format_skus(input_text)
+        else:
+            formatted = format_upcs(input_text)
+        
         output = ",".join(formatted)
 
         st.subheader("Result:")

@@ -30,8 +30,10 @@ with st.expander("📖 How to Use", expanded=False):
       - If UPC has 10 digits → keeps as is
       - If UPC has more than 10 digits → alternately removes from start/end until 10 remain
       - Example: `012345678901` (12 digits) → `1234567890` (10 digits)
-    - **Formats for SQL**: Wraps each UPC in `'%...%'` for ILIKE queries""")
-
+    - **Formats for SQL**: Wraps each UPC in `'%...%'` for ILIKE queries
+    ### SKU
+    When checked (SKU mode): No digit normalization, no wildcards (%), just wraps in single quotes""")
+    
 #################################################
 # How to Use Guide
 
