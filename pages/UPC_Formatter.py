@@ -27,7 +27,10 @@ def format_skus(text):
     output_lines = []
     for i in range(0, len(formatted), 10):
         chunk = formatted[i:i+10]
-        output_lines.append(",".join(chunk))
+        line = ",".join(chunk)
+        if i + 10 < len(formatted):
+            line += ","
+        output_lines.append(line)
     
     return "\n".join(output_lines)
 
@@ -48,7 +51,10 @@ def format_upcs(text):
     output_lines = []
     for i in range(0, len(formatted), 10):
         chunk = formatted[i:i+10]
-        output_lines.append(",".join(chunk))
+        line = ",".join(chunk)
+        if i + 10 < len(formatted):
+            line += ","
+        output_lines.append(line)
     
     return "\n".join(output_lines), too_long
 
