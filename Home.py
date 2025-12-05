@@ -48,26 +48,41 @@ with st.expander("How to Use", expanded=False):
 #################################################
 # How to Use Guide
 st.header("🛠️ UPC Fixer ")
-
-with st.expander("📖 How to Use", expanded=False):
+with st.expander("📖 How to Use Guide"):
     st.markdown("""
-    ### Purpose
-    Normalize UPC codes to 10 digits and format them for SQL queries.
+    ## What is UPC Fixer?
     
-    ### Steps
-    1. **Paste UPCs** in the text area below
-       - One per line or separated by commas
-       - Can include extra digits, spaces, or formatting
+    UPC Fixer normalizes Universal Product Codes (UPCs) to the standard 12-digit UPC-A format by adding missing digits and calculating check digits according to a UPC algorithm.
     
-    2. **Click Process**
+    ## The Rules
     
-    3. **Copy the result** from the output box
+    The tool handles three different scenarios:
     
-    ### What It Does
-    - **Extracts digits only** (removes spaces, dashes, letters)
-    - **Normalizes to 10 digits**:
-      - If UPC has 10 digits → keeps as is
-      - If UPC has more than 10 digits → alternately removes from start/end until 10 remain
-      - Example: `012345678901` (12 digits) → `1234567890` (10 digits)
-    - **Formats for SQL**: Wraps each UPC in `'%...%'` for ILIKE queries""")
+    ### 1. 10-Digit UPCs
+    - **Action:** Adds a leading '0' and calculates the check digit
+    - **Example:** `1234567890` → `012345678905`
+    - **Why:** UPC-A codes require 12 digits. A 10-digit code is missing both the leading zero and the check digit
     
+    ### 2. 11-Digit UPCs
+    - **Action:** Calculates and appends the check digit
+    - **Example:** `12345678901` → `123456789012`
+    - **Why:** The code has the correct prefix but is missing the final verification digit
+    
+    ### 3. 12-Digit UPCs
+    - **Action:** No modification needed
+    - **Example:** `123456789012` → `123456789012`
+    - **Why:** The code is already in the correct UPC-A format
+    
+    ## Input Format
+    
+    You can paste UPCs in any of these formats:
+    - **One per line:**
+      ```
+      1234567890
+      12345678901
+      123456789012
+      ```
+    - **Comma-separated:** `1234567890, 12345678901, 123456789012`
+    - **Mixed:** Any combination of commas and line breaks
+    
+    """)
