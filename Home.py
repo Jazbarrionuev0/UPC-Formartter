@@ -48,7 +48,7 @@ with st.expander("How to Use", expanded=False):
 #################################################
 # How to Use Guide
 st.header("🛠️ UPC Fixer ")
-with st.expander("📖 How to Use Guide"):
+with st.expander("How to Use Guide"):
     st.markdown("""
     ## What is UPC Fixer?
     
@@ -85,4 +85,32 @@ with st.expander("📖 How to Use Guide"):
     - **Comma-separated:** `1234567890, 12345678901, 123456789012`
     - **Mixed:** Any combination of commas and line breaks
     
+    """)
+#################################################
+st.header("📝 String Formatter")
+
+with st.expander("How to Use Guide", expanded=False):
+    st.markdown("""
+    ### Purpose
+    Format lists of text for SQL `WHERE` clauses (ILIKE/IN) or convert US State names to abbreviations for database queries.
+
+    ### Steps
+    1. **Select Formatting Mode**:
+       - **ILIKE**: For wildcard/partial searches
+       - **IN**: For exact matches
+       - **State Abbreviation**: To convert names like "California" to "CA"
+    
+    2. **Optional Settings**:
+       - Check **"Add % between words"** if you are searching for multi-word phrases and want to match them regardless of spacing.
+
+    3. **Paste Data**:
+       - Enter words, phrases, or state names (one per line or comma-separated).
+
+    4. **Process & Copy**:
+       - Click Process and copy the SQL-ready code block.
+
+    ### Special Feature
+    **Add % between words**:
+    - Replaces spaces with wildcards `%`. This is useful when data might have extra words in the middle.
+    - **Example:** `diet coke` → `'%diet%coke%'` (Will match "Diet Cherry Coke")
     """)
